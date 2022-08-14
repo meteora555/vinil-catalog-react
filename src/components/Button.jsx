@@ -1,12 +1,15 @@
 
 
-function Button() {
+function Button(props) {
+    
     return(
-        <div>
-            <button className="header__card-button">
-              <span><b>0</b> Товаров</span>
-              <span><b>0</b> ₽</span>
-              </button>
+        <div>   
+            <button 
+            onClick={props.onClick} 
+            className="header__card-button">
+            <span><b>0</b> Товаров</span>
+            <span><b>0</b> ₽</span>
+            </button>
         </div>
         
     );

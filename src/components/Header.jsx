@@ -9,7 +9,14 @@ import React from 'react';
 
 import Button from './Button';
 
+
+
 function Header() {
+
+    const test = () => {
+      alert("Hello");
+    };
+
     return(
         <div className="Header">
             <div className="wrapper">
@@ -31,7 +38,7 @@ function Header() {
                         <img  className="header__nav-img" src= {navSvg} alt="nav"></img>
                     </button>
                   </div>
-                  <Button />
+                  <Button onClick={ test } />
                   <div className="header__basket">
                     <a className="header__basket-link" href="/card.html">
                         <img className="header__basket-img" src= {basket} alt="basket"></img>
