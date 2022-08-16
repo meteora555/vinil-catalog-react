@@ -25,7 +25,7 @@ function Сategories({ items, onClick }) {
             </button>
           </div>
         ))}
-      <SortPopup />
+      <SortPopup items={['популярности', 'цене', 'алфавиту']} />
     </div>
   );
 }

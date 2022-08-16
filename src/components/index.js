@@ -1,8 +1,8 @@
 import Header from './Header';
 import Footer from './Footer';
 import Categories from './Categories';
-import CatalogItem from './CatalogItem';
-import Catalog from './Catalog';
+import CatalogItem from './Catalog/CatalogItem';
+import Catalog from './Catalog/Catalog';
 import Button from './Button';
 import SortPopup from './SortPopup';
 

@@ -75,7 +75,7 @@
         width: 450px;
         padding-top: 15px;
         
-        background-color: #ededed;
+        background-color: #fff;
     }
     &__item-link{
         color: #aa0606;
@@ -89,6 +89,7 @@
         @extend %main-text;
         font-size: 44px;
         font-weight: 600;
+        background-color:#fff;
     }
     &__about-text{
         @extend %main-text;

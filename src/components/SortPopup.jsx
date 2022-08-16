@@ -1,18 +1,34 @@
 import React from 'react';
 
-function SortPopup() {
+function SortPopup({ items }) {
+  // Используем useState для определения  показа модального окна сортировки
   const [visiblePopup, setVisiblePopup] = React.useState(false);
+
+  //Используем useState для определения состояния окна сортировки
+  const [activeItem, setActiveItem] = React.useState(0);
+
+  const onSelectItem = (index) => {
+    setActiveItem(index);
+    setVisiblePopup(false);
+  };
+  const activeLavel = items[activeItem];
+
+  // Создаем ссылку для дом элемента сортировки
   const sortRef = React.useRef();
 
+  //для переключения показать/скрыть модального окна сортировки
   const toogleVisiblePopup = () => {
     setVisiblePopup(!visiblePopup);
   };
+
+  //переменная для определения клика вне области модального окна
   const handleOutsideClick = (e) => {
     if (!e.path.includes(sortRef.current)) {
       setVisiblePopup(false);
     }
   };
 
+  // создаем обраотчик событий на body для отслеживание клика
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
   }, []);
@@ -20,6 +36,7 @@ function SortPopup() {
     <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
+          className={visiblePopup ? 'rotated' : ''}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -31,14 +48,20 @@ function SortPopup() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toogleVisiblePopup}>популярности</span>
+        <span onClick={toogleVisiblePopup}>{activeLavel}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
           <ul>
-            <li className="active__item">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li>
+            {items &&
+              items.map((name, index) => (
+                <li
+                  key={`${name}__${index}`}
+                  className={activeItem === index ? 'active__item' : ''}
+                  onClick={() => onSelectItem(index)}>
+                  {name}
+                </li>
+              ))}
           </ul>
         </div>
       )}
