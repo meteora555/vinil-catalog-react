@@ -1,10 +1,10 @@
 import React from 'react';
 import { Catalog } from '../components';
 
-function Home() {
+function Home({ items }) {
   return (
     <div>
-      <Catalog />
+      <Catalog items={items} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import CatalogItem from './CatalogItem';
 import Сategories from '../Categories';
 
-function Catalog() {
+function Catalog({ items }) {
   return (
     <div className="main">
       <div className="main__wrapper">
@@ -15,7 +15,7 @@ function Catalog() {
                 'Диско',
                 'Поп',
                 'Рок',
-                'Электро',
+                'Альтернатива',
                 'Джаз',
                 'Блюз',
                 'Кантри',
@@ -24,10 +24,9 @@ function Catalog() {
             />
             <h2 className="catalog__title">Все товары</h2>
             <div className="catalog__content">
-              <CatalogItem />
-              <CatalogItem />
-              <CatalogItem />
-              <CatalogItem />
+              {items.map((obj) => (
+                <CatalogItem key={obj.id} {...obj} />
+              ))}
             </div>
           </div>
         </div>
