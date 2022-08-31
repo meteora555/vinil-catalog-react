@@ -1,20 +1,11 @@
 import React from 'react';
 
-function SortPopup({ items }) {
+const SortPopup = React.memo(function SortPopup({ items, activeSortType, onClickSortType }) {
   // Используем useState для определения  показа модального окна сортировки
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-
-  //Используем useState для определения состояния окна сортировки
-  const [activeItem, setActiveItem] = React.useState(0);
-
-  const onSelectItem = (index) => {
-    setActiveItem(index);
-    setVisiblePopup(false);
-  };
-  const activeLavel = items[activeItem];
-
   // Создаем ссылку для дом элемента сортировки
   const sortRef = React.useRef();
+  const activeLabel = items.find((obj) => obj.type === activeSortType).name;
 
   //для переключения показать/скрыть модального окна сортировки
   const toogleVisiblePopup = () => {
@@ -26,6 +17,13 @@ function SortPopup({ items }) {
     if (!e.path.includes(sortRef.current)) {
       setVisiblePopup(false);
     }
+  };
+
+  const onSelectItem = (index) => {
+    if (onClickSortType) {
+      onClickSortType(index);
+    }
+    setVisiblePopup(false);
   };
 
   // создаем обраотчик событий на body для отслеживание клика
@@ -48,18 +46,18 @@ function SortPopup({ items }) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toogleVisiblePopup}>{activeLavel}</span>
+        <span onClick={toogleVisiblePopup}>{activeLabel}</span>
       </div>
       {visiblePopup && (
         <div className="sort__popup">
           <ul>
             {items &&
-              items.map((name, index) => (
+              items.map((obj, index) => (
                 <li
-                  key={`${name}__${index}`}
-                  className={activeItem === index ? 'active__item' : ''}
-                  onClick={() => onSelectItem(index)}>
-                  {name}
+                  onClick={() => onSelectItem(obj)}
+                  className={activeSortType === obj.type ? 'active' : ''}
+                  key={`${obj.type}_${index}`}>
+                  {obj.name}
                 </li>
               ))}
           </ul>
@@ -67,6 +65,6 @@ function SortPopup({ items }) {
       )}
     </div>
   );
-}
+});
 
 export default SortPopup;
