@@ -7,6 +7,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchVinils } from '../../redux/actions/vinils';
 import { setCategory } from '../../redux/actions/filters';
+import { addVinilToCart } from '../../redux/actions/cart';
 
 const categoryNames = [
   'Хип-хоп',
@@ -31,13 +32,15 @@ function Catalog() {
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
   }, []);
-  console.log(sortBy);
 
   //получаем данные через dispatch от redux, и выполняем action
   React.useEffect(() => {
     dispatch(fetchVinils(category, sortBy));
   }, [category, sortBy]);
 
+  const handelAddVinil = (obj) => {
+    dispatch(addVinilToCart(obj));
+  };
   return (
     <div className="main">
       <div className="main__wrapper">
@@ -52,7 +55,9 @@ function Catalog() {
             <div className="catalog__content">
               {/* указываем состояние, если данные пришли то рендорим наши винилы, если нет то рендерим массив из 12 компонетнов процесса загрузки */}
               {isLoaded
-                ? items.map((obj) => <CatalogItem key={obj.id} {...obj} />)
+                ? items.map((obj) => (
+                    <CatalogItem onClickAddVinil={handelAddVinil} key={obj.id} {...obj} />
+                  ))
                 : Array(12)
                     .fill(0)
                     .map((_, index) => <CatalogLoading key={index} />)}

@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import propTypes from 'prop-types';
 
-function CatalogItem({ name, imageUrl, price, rating, types }) {
+function CatalogItem({ id, name, imageUrl, price, rating, types, onClickAddVinil }) {
   //Создаем функциональный компонент, в пропсы которого, мы прокинули обьект obj из компонента Catalog, с помощью деструкторизации вытаскиваем известные нам свойства.
   const availableTypes = ['Vinil', 'CD', 'Бокс сет'];
 
@@ -10,6 +10,18 @@ function CatalogItem({ name, imageUrl, price, rating, types }) {
   const [activeType, setActiveType] = React.useState(types[0]);
   const onSelectType = (index) => {
     setActiveType(index);
+  };
+
+  // Создаем константу для хранения обьекта выбранного винила, для дальнейшей передачи его в state
+  const onAddVinil = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      type: availableTypes[activeType],
+    };
+    onClickAddVinil(obj);
   };
 
   return (
@@ -38,7 +50,7 @@ function CatalogItem({ name, imageUrl, price, rating, types }) {
         <div className="vinil__item-bottom">
           <div className="vinil__item-price"> {price} ₽</div>
 
-          <div className="vinil__item-addbtn">
+          <button onClick={onAddVinil} className="vinil__item-addbtn">
             <svg
               width="12"
               height="12"
@@ -52,7 +64,7 @@ function CatalogItem({ name, imageUrl, price, rating, types }) {
             </svg>
             <span>Добавить</span>
             <i>1</i>
-          </div>
+          </button>
         </div>
       </div>
     </div>

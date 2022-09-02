@@ -3,8 +3,8 @@ import search from '../assets/images/icons/search.svg';
 import navSvg from '../assets/images/icons/icon_menu.svg';
 import basket from '../assets/images/icons/basket.svg';
 import React from 'react';
-
 import Button from './Button';
+
 import { Link } from 'react-router-dom';
 
 function Header() {

@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 function Button(props) {
+  const { totalPrice, totalCount } = useSelector(({ cartReducer }) => ({
+    totalPrice: cartReducer.totalPrice,
+    totalCount: cartReducer.totalCount,
+  }));
   return (
     <div>
       <Link to={'/cart'}>
         <button className="header__card-button">
           <span>
-            <b>0</b> Товаров
+            <b>{totalCount}</b> Товаров
           </span>
           <span>
-            <b>0</b> ₽
+            <b>{totalPrice}</b> ₽
           </span>
         </button>
       </Link>
