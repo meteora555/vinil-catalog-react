@@ -25,6 +25,7 @@ const categoryNames = [
 function Catalog() {
   //Получаем данные с redux и рендерим их на странице сначала наш обьект с винилами, а также процесс загрузки
   const items = useSelector(({ vinilReducer }) => vinilReducer.items);
+  const cartItems = useSelector(({ cartReducer }) => cartReducer.items);
   const isLoaded = useSelector(({ vinilReducer }) => vinilReducer.isLoaded);
   const { category } = useSelector(({ filterReducer }) => filterReducer);
   const { sortBy } = useSelector(({ filterReducer }) => filterReducer);
@@ -56,7 +57,12 @@ function Catalog() {
               {/* указываем состояние, если данные пришли то рендорим наши винилы, если нет то рендерим массив из 12 компонетнов процесса загрузки */}
               {isLoaded
                 ? items.map((obj) => (
-                    <CatalogItem onClickAddVinil={handelAddVinil} key={obj.id} {...obj} />
+                    <CatalogItem
+                      onClickAddVinil={handelAddVinil}
+                      key={obj.id}
+                      adedCount={cartItems[obj.id] && cartItems[obj.id].length}
+                      {...obj}
+                    />
                   ))
                 : Array(12)
                     .fill(0)

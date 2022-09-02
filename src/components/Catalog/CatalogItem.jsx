@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import propTypes from 'prop-types';
 
-function CatalogItem({ id, name, imageUrl, price, rating, types, onClickAddVinil }) {
+function CatalogItem({ id, name, imageUrl, price, rating, types, onClickAddVinil, adedCount }) {
   //Создаем функциональный компонент, в пропсы которого, мы прокинули обьект obj из компонента Catalog, с помощью деструкторизации вытаскиваем известные нам свойства.
   const availableTypes = ['Vinil', 'CD', 'Бокс сет'];
 
@@ -63,7 +63,7 @@ function CatalogItem({ id, name, imageUrl, price, rating, types, onClickAddVinil
               />
             </svg>
             <span>Добавить</span>
-            <i>1</i>
+            {{ adedCount } && <i>{adedCount}</i>}
           </button>
         </div>
       </div>

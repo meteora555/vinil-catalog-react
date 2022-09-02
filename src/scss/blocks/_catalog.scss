@@ -216,6 +216,12 @@
         height: 38px;
         border-radius: 10px;
         box-shadow: 6px 6px 5px rgba(0, 0, 0, 0.27);
+
+        i{
+            font-size: 22px;
+            @extend %main-text;
+            color:#f40a0a;
+        }
         &:hover{
             color: #f40a0a;
             
