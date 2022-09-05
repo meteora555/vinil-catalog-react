@@ -58,6 +58,7 @@
         @extend %title-text;
         font-size: 26px;
         font-weight: 600;
+        cursor: pointer;
         &:hover{
             opacity: 1;
         }

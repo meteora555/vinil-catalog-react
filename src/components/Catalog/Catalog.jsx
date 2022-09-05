@@ -60,7 +60,7 @@ function Catalog() {
                     <CatalogItem
                       onClickAddVinil={handelAddVinil}
                       key={obj.id}
-                      adedCount={cartItems[obj.id] && cartItems[obj.id].length}
+                      adedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
                       {...obj}
                     />
                   ))

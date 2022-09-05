@@ -2,15 +2,13 @@ import React from 'react';
 
 import LogoJpg from '../../assets/images/comin/rammstein-zeit.jpg';
 
-function CartItem() {
+function CartItem({ name, type, totalPrice, totalCount }) {
   return (
     <div className="cart__item">
       <img className="cart__item-img" src={LogoJpg} alt="miniimg rammstein"></img>
       <div className="cart__item-info">
-        <h2 className="cart__item-info-title">rammstein</h2>
-        <p className="cart__item-info-text">
-          Zeit-восьмой студийный альбом, вышедший 29 апреля 2022 года
-        </p>
+        <h2 className="cart__item-info-title">{name}</h2>
+        <p className="cart__item-info-text">{type}</p>
       </div>
       <div className="cart__item-count">
         <div className="cart__item-count-btn button-circle button-minus">
@@ -26,7 +24,7 @@ function CartItem() {
             />
           </svg>
         </div>
-        <b>2</b>
+        <b>{totalCount}</b>
         <div className="cart__item-count-btn button-circle button-plus">
           <svg
             width="12"
@@ -45,7 +43,7 @@ function CartItem() {
           </svg>
         </div>
       </div>
-      <div className="cart__item-price">5.000 ₽</div>
+      <div className="cart__item-price">{totalPrice} ₽</div>
       <div className="cart__item-remove">
         <div className="cart__item-remove button-circle">
           <svg

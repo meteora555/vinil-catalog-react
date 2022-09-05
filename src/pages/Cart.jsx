@@ -1,8 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { clearAll } from '../redux/actions/cart';
+
+import { Link } from 'react-router-dom';
 
 function Cart() {
+  const { totalPrice, totalCount, items } = useSelector(({ cartReducer }) => cartReducer);
+  const dispatch = useDispatch();
+
+  const onClearCart = () => {
+    if (window.confirm('Вы действительно хотите очистить корзину?')) {
+      dispatch(clearAll());
+    }
+  };
+
+  const adedVinils = Object.keys(items).map((key) => {
+    return items[key].items[0];
+  });
   return (
     <div className="cart">
       <div className="cart__top">
@@ -34,7 +49,7 @@ function Cart() {
               stroke-linecap="round"
               stroke-linejoin="round"
             />
-          </svg>{' '}
+          </svg>
           Корзина
         </h2>
         <div className="cart__top-clear">
@@ -74,23 +89,29 @@ function Cart() {
             />
           </svg>
 
-          <span>Очистить корзину</span>
+          <span onClick={onClearCart}>Очистить корзину</span>
         </div>
       </div>
       <div className="cart__content__items">
-        <CartItem />
-        <CartItem />
+        {adedVinils.map((obj) => (
+          <CartItem
+            name={obj.name}
+            type={obj.type}
+            totalPrice={items[obj.id].totalPrice}
+            totalCount={items[obj.id].items.length}
+          />
+        ))}
       </div>
 
       <div className="cart__bottom">
         <div className="cart__bottom-details">
           <span>
             Всего пластинок:
-            <b>3 шт.</b>
+            <b> {totalCount} шт.</b>
           </span>
           <span>
             Сумма заказа:
-            <b>20.000₽</b>
+            <b> {totalPrice} ₽</b>
           </span>
         </div>
         <div className="cart__bottom-buttons">
