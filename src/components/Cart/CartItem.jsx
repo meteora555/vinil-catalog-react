@@ -2,7 +2,16 @@ import React from 'react';
 
 import LogoJpg from '../../assets/images/comin/rammstein-zeit.jpg';
 
-function CartItem({ name, type, totalPrice, totalCount }) {
+function CartItem({ id, name, type, totalPrice, totalCount, onRemove, onPlus, onMinus }) {
+  const handleRemoveClick = () => {
+    onRemove(id);
+  };
+  const handlePlusItem = () => {
+    onPlus(id);
+  };
+  const handleMinusItem = () => {
+    onMinus(id);
+  };
   return (
     <div className="cart__item">
       <img className="cart__item-img" src={LogoJpg} alt="miniimg rammstein"></img>
@@ -11,7 +20,7 @@ function CartItem({ name, type, totalPrice, totalCount }) {
         <p className="cart__item-info-text">{type}</p>
       </div>
       <div className="cart__item-count">
-        <div className="cart__item-count-btn button-circle button-minus">
+        <div onClick={handleMinusItem} className="cart__item-count-btn button-circle button-minus">
           <svg
             width="12"
             height="12"
@@ -25,7 +34,7 @@ function CartItem({ name, type, totalPrice, totalCount }) {
           </svg>
         </div>
         <b>{totalCount}</b>
-        <div className="cart__item-count-btn button-circle button-plus">
+        <div onClick={handlePlusItem} className="cart__item-count-btn button-circle button-plus">
           <svg
             width="12"
             height="12"
@@ -45,7 +54,7 @@ function CartItem({ name, type, totalPrice, totalCount }) {
       </div>
       <div className="cart__item-price">{totalPrice} ₽</div>
       <div className="cart__item-remove">
-        <div className="cart__item-remove button-circle">
+        <button onClick={handleRemoveClick} className="cart__item-remove button-circle">
           <svg
             width="12"
             height="12"
@@ -61,7 +70,7 @@ function CartItem({ name, type, totalPrice, totalCount }) {
               fill="#f40a0a"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );
