@@ -4,12 +4,22 @@ import filterReducer from './reducers/filters';
 import vinilReducer from './reducers/vinils';
 import cartReducer from './reducers/cart';
 
-const rootReducer = combineReducers({
-  filterReducer,
-  vinilReducer,
-  cartReducer,
-});
+// Старый вариант
+// const rootReducer = combineReducers({
+//   filterReducer,
+//   vinilReducer,
+//   cartReducer,
+// });
+
+// export const store = configureStore({
+//   reducer: rootReducer,
+// });
+
+// изучаю rtk
+import filter from './slices/filterSlice';
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    filter,
+  },
 });

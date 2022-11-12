@@ -4,7 +4,7 @@ import CatalogLoading from './CatalogLoading';
 
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from '@reduxjs/toolkit';
 import { fetchVinils } from '../../redux/actions/vinils';
 import { setCategory } from '../../redux/actions/filters';
 import { addVinilToCart } from '../../redux/actions/cart';
